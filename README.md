@@ -18,7 +18,7 @@ java.nio.HeapByteBuffer[pos=0 lim=1024 cap=1024]    NIO 空循环
 
 aaaaaaaaaaaaa
 
-这个过程只有一次BIO循环，完成一次写和读。而NIO除了完成读写以为还多跑了N多空循环。
+相同的时间周期 BIO只完成一次写和读，而NIO除了完成一次读写以为还多跑了N多空循环。
 
 tomcat8 已经完全抛弃了BIO。
 
