@@ -10,7 +10,7 @@ public class ConsistentTest {
 	 * 
 	 * 初次看LinkedBlockingQueue的代码 对 h.next = h ;这句十分不解 为什么不是 h.next = null ;
 	 * 后来慢慢看到作者的说明 ， 大意是说为了实现弱一致性的iterators ; 假设声明 iterators 后head节点出队， 如果
-	 * h.next=null 则会导致遍历结束;
+	 * h.next=null 则会导致遍历结束 。
 	 * 
 	 */
 
