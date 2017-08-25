@@ -12,7 +12,7 @@ public class ConsistentTest {
 	 * 后来慢慢看到作者的说明 ， 大意是说为了实现弱一致性的iterators ; 假设声明 iterators 后head节点出队， 如果
 	 * h.next=null 则会导致遍历结束 ，如果直接指向下一个节点，则会增加GC的处理量。所以自己指向自己，在遍历时增加判断
 	 * 逻辑，如果是自己指向自己，则下一个节点应当为 head.next ;
-	 * 
+	 * 英语太弱，理解经典的数据结构十分吃力
 	 */
 
 	public static void main(String[] args) {
