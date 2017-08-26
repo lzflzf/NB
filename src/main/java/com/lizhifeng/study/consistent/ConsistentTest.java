@@ -11,8 +11,7 @@ public class ConsistentTest {
 	 * 初次看LinkedBlockingQueue的代码 对 h.next = h ;这句十分不解 为什么不是 h.next = null ;
 	 * 后来慢慢看到作者的说明 ， 大意是说为了实现弱一致性的iterators ; 假设声明 iterators 后head节点出队， 如果
 	 * h.next=null 则会导致遍历结束 ，如果直接指向下一个节点，则会增加GC的处理量。所以自己指向自己，在遍历时增加判断
-	 * 逻辑，如果是自己指向自己，则下一个节点应当为 head.next ;
-	 * 英语太弱，理解经典的数据结构十分吃力
+	 * 逻辑，如果是自己指向自己，则下一个节点应当为 head.next ; 英语太弱，理解经典的数据结构十分吃力
 	 */
 
 	public static void main(String[] args) {
@@ -49,6 +48,10 @@ public class ConsistentTest {
 		 * 
 		 * modCount++ 来控制版本就一定天衣无缝么 modCount == modCount + Integer.MAX_VALUE
 		 * +Integer.MAX_VALUE + 2 ; 没有完美的程序，只有更快，更正确的程序 Faster, more correct.
+		 * 
+		 * 进队之后可能还有线程阻塞在进队处(队列未满，可以进队) ，也可能有线程阻塞在出队处(进队前队列为空,线程等待，进队之后有元素可以出队)
+		 * 出队之后可能还有线程阻塞在进队处(队列已满，现在腾出了一个位置) ，也可能有线程阻塞在出队处(出队后还有元素可以出队)
+		 * 删除节点后可能还有线程阻塞在进队处
 		 */
 	}
 }
