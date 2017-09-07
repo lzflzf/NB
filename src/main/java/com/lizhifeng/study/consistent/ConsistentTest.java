@@ -19,10 +19,10 @@ public class ConsistentTest {
 		LinkedBlockingQueue<String> lbq = new LinkedBlockingQueue<String>();
 
 		lbq.offer("qidi");
-		Iterator<String> it1 = lbq.iterator(); // 先构造遍历器
-		lbq.poll(); // 这个动作遍历器没有感应到 因为 h.next = h ;
-		lbq.offer("lizhifeng"); // 入队
-		lbq.poll(); // 出队 // 这两个动作遍历器都没有感应到
+		Iterator<String> it1 = lbq.iterator(); /* 先构造遍历器 */
+		lbq.poll(); /* 这个动作遍历器没有感应到 因为 h.next = h ; */
+		lbq.offer("lizhifeng"); /* 入队 */
+		lbq.poll(); 	/* 出队  这两个动作遍历器都没有感应到 */
 		lbq.offer("lizhifeng");
 		lbq.offer("lizhifeng");
 
