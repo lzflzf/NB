@@ -10,6 +10,7 @@ public class VarIntTest {
 		
 		int min = -30000 ;
 		int max = 30000 ;
+		
 
 		for (int i = min ; i <= max; i++) {
 			buffer.position(0);
