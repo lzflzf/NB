@@ -48,7 +48,8 @@ public class VarIntTest {
 		int value = 0;
 		int i = 0;
 		int b;
-		while (((b = buffer.get()) & 0x80) != 0) {    /* 判断最高位是不是1 */
+		/* 000000000000000000000000?******* */
+		while (((b = buffer.get()) & 0x80) != 0) {    /* 判断最高位是不是1,即上面的?位 */
 			value |= (b & 0x7f) << i;
 			i += 7;
 			if (i > 28)
