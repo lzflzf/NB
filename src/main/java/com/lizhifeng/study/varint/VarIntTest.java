@@ -1,4 +1,4 @@
-package varint;
+package com.lizhifeng.study.varint;
 
 import java.nio.ByteBuffer;
 
