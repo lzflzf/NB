@@ -12,10 +12,10 @@ public class VarIntTest {
 		int max = min + 300;
 
 		for (int i = min; i <= max; i++) {
-			buffer.position(0);
+			buffer.clear();     /* buffer 处于写模式  */
 			writeVarint(i, buffer);
 			System.out.printf("%d使用varint进行编码占用了%d字节\n", i, buffer.position());
-			buffer.position(0);
+			buffer.flip();      /* buffer 处于读模式  */
 			int readValue = readVarint(buffer);
 			if (i != readValue) {
 				System.err.println("ERROR");
