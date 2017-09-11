@@ -23,12 +23,12 @@ public class NB {
 
 		try {
 			ServerSocketChannel ssChannel = ServerSocketChannel.open();
-			SocketAddress local = new InetSocketAddress(9990);
+			SocketAddress local = new InetSocketAddress(9992);
 			ssChannel.socket().bind(local);
 			ssChannel.configureBlocking(true);
 
 			new Thread(new Client(), "client-thread1").start();
-			
+	
 			Selector selector = Selector.open() ;
 
 			while (true) {
@@ -43,8 +43,9 @@ public class NB {
 				
 				while(iterator.hasNext())
 				{
-					SelectionKey selectionkey = iterator.next() ;					
-					System.out.println(selectionkey.interestOps());				
+					SelectionKey selectionkey = iterator.next() ;	
+					selectionkey.cancel();
+					// System.out.println(selectionkey.interestOps());				
 				} 
 				
 				try {
@@ -79,14 +80,27 @@ class Handler implements Runnable {
 		ByteBuffer Buffer = ByteBuffer.allocate(1024);
 		while (true) {
 			try {
-				Buffer.position(0);
-				socketchannel.read(Buffer);
-				// System.out.println(Buffer.toString());
-				// Buffer.position(0) ;
-				socketchannel.write(Buffer);
+				Buffer.clear();
+				int read = socketchannel.read(Buffer);
+
+				System.err.println(read);
+				System.out.println(Buffer.toString());
+
+				Buffer.flip();
+				
+				int write = 0 ;
+				
+				while(Buffer.hasRemaining() && write < 24)
+				{
+					int written = socketchannel.write(Buffer);
+					write += written ;
+				}
+			
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
 			}
 		}
 	}
@@ -106,12 +120,15 @@ class Client implements Runnable {
 				e.printStackTrace();
 			}
 
-			Socket socket = new Socket("127.0.0.1", 9990);
+			Socket socket = new Socket("127.0.0.1", 9992);
+			
+			int i = 1000000000 ;
 
 			while (true) {
 				OutputStream OutputStream = socket.getOutputStream();
 				PrintWriter printwriter = new PrintWriter(OutputStream);
-				printwriter.println("aaaaaaaaaaaaa");
+				printwriter.println(i++);
+				printwriter.println(i++);
 				printwriter.flush();
 
 				InputStream inputstream = socket.getInputStream();
@@ -120,12 +137,10 @@ class Client implements Runnable {
 				BufferedReader bufferedreader = new BufferedReader(
 						inputstreamreader);
 
-				String readnewline;
-				while ((readnewline = bufferedreader.readLine().trim())
-						.length() > 0) {
-					// System.out.println(readnewline);
-					break;
-				}
+				
+				System.out.println(bufferedreader.readLine().trim()+"abcdefg");
+				System.out.println(bufferedreader.readLine().trim()+"abcdefg");
+
 			}
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
