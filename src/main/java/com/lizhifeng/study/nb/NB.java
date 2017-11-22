@@ -28,7 +28,7 @@ public class NB {
 			ssChannel.configureBlocking(true);
 
 			new Thread(new Client(), "client-thread1").start();
-	
+			
 			Selector selector = Selector.open() ;
 
 			while (true) {
@@ -137,10 +137,10 @@ class Client implements Runnable {
 				BufferedReader bufferedreader = new BufferedReader(
 						inputstreamreader);
 
+				System.out.println(bufferedreader.readLine().trim()+"abcdefg");
+				System.out.println(bufferedreader.readLine().trim()+"abcdefg");
 				
-				System.out.println(bufferedreader.readLine().trim()+"abcdefg");
-				System.out.println(bufferedreader.readLine().trim()+"abcdefg");
-
+				socket.close();
 			}
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
