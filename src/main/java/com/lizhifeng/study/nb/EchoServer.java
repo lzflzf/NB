@@ -109,7 +109,7 @@ class HandleThread implements Runnable {
                 filePath = rootPath + filePath;
 
                 byte[] fileContent = EchoServer.readFileContent(filePath);
-                outStream.write(fileContent);            //  输出正文
+                outStream.write(fileContent);            //  输出正文 // 如何压缩输出正文
                 outStream.flush();
 
                 out.flush();
