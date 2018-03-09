@@ -102,14 +102,14 @@ class HandleThread implements Runnable {
                 out.flush();
                 out.println("HTTP/1.1 200 OK");
                 out.println("Content-Type: " + ContentType);
-                out.println();
+                out.println();                             //  输出header头
 
                 String rootPath = "D:\\moban2770\\moban2770";
 
                 filePath = rootPath + filePath;
 
                 byte[] fileContent = EchoServer.readFileContent(filePath);
-                outStream.write(fileContent);
+                outStream.write(fileContent);            //  输出正文
                 outStream.flush();
 
                 out.flush();
